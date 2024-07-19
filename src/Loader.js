@@ -26,7 +26,6 @@ class Loader {
     } else {
       try {
         const response = await fetch( src, { method: "HEAD" } );
-        console.log('checking model type via HEAD request');
         if ( response.ok ) {
           const contentType = response.headers.get('content-type');
           if ( contentType === 'model/gltf+json' ||
