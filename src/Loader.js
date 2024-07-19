@@ -139,6 +139,7 @@ class Loader {
       } );
     } else {
       console.error( 'Model must be STL or GLTB' );
+      console.log(options);
     }
   }
 }

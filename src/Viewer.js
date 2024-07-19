@@ -1,6 +1,6 @@
 import {AlwaysDepth, AmbientLight, Clock, DirectionalLight, GridHelper, Group,
-  MathUtils, Object3D, OrthographicCamera, Scene, sRGBEncoding, Vector3,
-  WebGLRenderer} from 'three';
+  MathUtils, Object3D, OrthographicCamera, Scene, Vector3, WebGLRenderer}
+  from 'three';
 
 import {icon} from '@fortawesome/fontawesome-svg-core';
 import {faUndo} from '@fortawesome/free-solid-svg-icons';
@@ -66,7 +66,6 @@ class Viewer {
     //
     this.renderer = new WebGLRenderer( {antialias: true} );
     this.renderer.setPixelRatio( window.devicePixelRatio );
-    this.renderer.outputEncoding = sRGBEncoding;
     this.renderer.setSize( container.clientWidth, container.clientHeight );
     this.renderer.setClearColor( 0xcccccc );
 
