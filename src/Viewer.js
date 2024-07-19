@@ -25,6 +25,7 @@ class Viewer {
   constructor( container, selectedOptions ) {
     const scope = this;
     this.container = container;
+    this.firstPaint = true;
 
     // Parse options
     const options = {
@@ -167,6 +168,10 @@ class Viewer {
     this.animating = true;
     this.renderer.setAnimationLoop( animate );
     this.controls.addEventListener( 'change', () => {
+      if (this.firstPaint) {
+        this.firstPaint = false;
+        this.controls.reset();
+      }
       scope.render();
     } );
   }
