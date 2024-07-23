@@ -1,6 +1,6 @@
 import {AlwaysDepth, AmbientLight, Clock, DirectionalLight, GridHelper, Group,
-  MathUtils, Object3D, OrthographicCamera, Scene, Vector3, WebGLRenderer}
-  from 'three';
+  HemisphereLight, MathUtils, Object3D, OrthographicCamera, Scene,
+  SRGBColorSpace, Vector3, WebGLRenderer} from 'three';
 
 import {icon} from '@fortawesome/fontawesome-svg-core';
 import {faUndo} from '@fortawesome/free-solid-svg-icons';
@@ -58,14 +58,17 @@ class Viewer {
     this.scene.add( this.camera );
 
     //
-    this.a_light = new AmbientLight( 0x404040, 0.3 );
-    this.scene.add( this.a_light );
+    // this.a_light = new AmbientLight( 0x404040, 0.6 );
+    // this.scene.add( this.a_light );
+    this.h_light = new HemisphereLight( 0xffffbb, 0x080820, 0.7 );
+    this.scene.add( this.h_light );
     // Directional light attached to camera
-    this.d_light = new DirectionalLight( 0xffffff, 0.6, {castShadow: true} );
+    this.d_light = new DirectionalLight( 0xffffff, 0.7, {castShadow: true} );
     this.camera.add( this.d_light );
 
     //
     this.renderer = new WebGLRenderer( {antialias: true} );
+    this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setSize( container.clientWidth, container.clientHeight );
     this.renderer.setClearColor( 0xcccccc );
