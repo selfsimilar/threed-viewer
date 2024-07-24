@@ -7,6 +7,7 @@ import {faUndo} from '@fortawesome/free-solid-svg-icons';
 import {faSquare} from '@fortawesome/free-regular-svg-icons';
 
 import {ArcballControls} from 'three/examples/jsm/controls/ArcballControls.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {CSS2DRenderer} from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import {AxisHelper} from './AxisHelper.js';
 import {Button} from './Button.js';
@@ -38,10 +39,13 @@ class Viewer {
       toolbar: true,
       help: true,
       wireframe: true,
+      preview: false,
     };
     if ( selectedOptions !== null ) {
       Object.assign( options, selectedOptions );
     }
+
+    this.preview = options.preview;
 
     this.wireframeVisible = options.wireframe;
     // Create scene
@@ -95,9 +99,16 @@ class Viewer {
     }
 
     // Controls
-    this.controls = new ArcballControls( this.camera, this.labelRenderer.domElement, this.scene );
-    this.controls.enabled = options.controls;
-    this.controls.setGizmosVisible( false );
+    if (this.preview) {
+      this.controls = new OrbitControls( this.camera, container );
+      this.controls.autoRotate = true;
+      this.controls.update();
+    }
+    else {
+      this.controls = new ArcballControls( this.camera, this.labelRenderer.domElement, this.scene );
+      this.controls.enabled = options.controls;
+      this.controls.setGizmosVisible( false );
+    }
 
     // Helpers
     this.grid = new Group();
@@ -124,6 +135,10 @@ class Viewer {
     this.animating = false;
     const animate = () => {
       let needsUpdate = scope.animating;
+
+      if (scope.preview) {
+        scope.controls.update();
+      }
 
       if ( scope.needsResize ) {
         scope.resize();

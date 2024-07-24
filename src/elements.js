@@ -387,12 +387,13 @@ class ViewerElement extends HTMLElement {
       grid: this.grid,
       axis_helper: this.axisHelper,
       controls: this.controls,
-      camera_position: new Vector3( 1, 1, 1 ),
+      camera_position: new Vector3( 0, -1, 1 ),
       camera_zoom: this.cameraZoom,
-      camera_up: new Vector3( 0, 1, 0 ),
+      camera_up: new Vector3( 0, 0, 1 ),
       toolbar: this.toolbar,
       help: this.help,
       wireframe: this.wireframe,
+      preview: this.preview,
     };
 
     this.viewer = new Viewer( this.shadowRoot.getElementById('viewer'), options );
@@ -437,6 +438,10 @@ class ViewerElement extends HTMLElement {
 
   get help() {
     return this.hasAttribute('help');
+  }
+
+  get preview() {
+    return this.hasAttribute('preview');
   }
 
   get wireframe() {
