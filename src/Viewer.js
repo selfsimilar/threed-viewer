@@ -102,6 +102,8 @@ class Viewer {
     if (this.preview) {
       this.controls = new OrbitControls( this.camera, container );
       this.controls.autoRotate = true;
+      this.controls.enablePan = false;
+      this.controls.enableZoom = false;
       this.controls.update();
     }
     else {
